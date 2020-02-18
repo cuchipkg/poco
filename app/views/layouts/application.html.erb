@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Poco</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <div style="padding-bottom: 70px;">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <%= link_to "Product", root_path(), class: "navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <% if user_signed_in? || admin_signed_in? %>
+          <li class="nav-item active">
+            <%= link_to "Thoát", destroy_user_session_path(),method: :delete,class: "btn btn-danger" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Tài khoản", quanly_path(),class: "nav-link" %>
+          </li>
+          <% else %>
+            <li class="nav-item active">
+              <%= link_to "Đăng Nhập", new_user_session_path(),class: "btn btn-primary" %>
+          </li>
+          <% end %>
+          <li class="nav-item">
+            <%= link_to "Giỏ hàng", dathang_path(),class: "nav-link" %>
+          </li>
+        </ul>
+        <%= form_tag timkiem_path(),class: "form-inline mt-2 mt-md-0" do %>
+          <%= text_field_tag :item_search,nil,class: "form-control mr-sm-2",placeholder: "Tên sản phẩm" %>
+        <%= submit_tag 'Tìm kiếm', class: "btn btn-outline-success my-2 my-sm-0" %>
+        <% end %>
+      </div>
+    </nav>
+  </div>
+  <body>
+    <%= yield %>
+  </body>
+</html>

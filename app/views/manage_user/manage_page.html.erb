@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <span data-feather="home">
+             <%= link_to "Đăng nhập Administrator",new_admin_session_path(),class: "nav-link" %> </span>
+            </a>
+          </li>
+
+          <% if admin_signed_in? %>
+              <li class="nav-item"> <%= link_to "Quản lý sản phẩm",items_path(),class: "nav-link" %> </span> </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

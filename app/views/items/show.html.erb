@@ -1,0 +1,50 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<div class="container">
+  <div class="row">
+    <div class="col-sm" style="text-align: center; background-color: hsla(0, 0%, 0%, 0.03);">
+      <% if @item.item_image.attached? %>
+        <h2><%= @item.name %></h2>
+        <hr>
+        <%= image_tag @item.item_image, class: "card-body",size:"460x440" %>
+      <% else %>
+        <img class="card-img-top" src="https://placehold.it/460x440">
+      <% end %>
+    </div>
+    <div class="col-sm">
+      
+        <h1><%= number_to_currency @item.price, unit: "VND",format: "%n %u",separator: ",",precision: 0 %></h1>
+        <%= @item.color %>
+        <br>
+        <%= link_to "Mua", dathang_path(),class: "btn btn-primary" %>
+        <%= link_to "Thêm vào giỏ", new_user_session_path(),class: "btn btn-primary" %>
+    </div>
+    <div class="col-sm">
+      <h3>Thông số kĩ thuật </h3>
+      <%= @item.info_tech %>
+    </div>
+  </div>
+  <hr>
+  Dac Diem
+  <%= @item.content %>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <h2>Bình luận</h2>
+    </div>
+    <div class="col" style="text-align: right;">
+      <% if user_signed_in? %>
+        <%= link_to "Bình luận",new_comment_path(item_info_id: @item.id),class: "btn btn-primary" %>
+      <% else %>
+        <%= link_to "Bình luận",new_user_session_path(),class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+  <hr>
+  <% @show_comment.each do |cmt| %>
+    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+      <strong class="d-block text-gray-dark"><%= cmt.user.email %></strong>
+      <%= cmt.content %>
+    </p>
+  <% end %>
+</div>

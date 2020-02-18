@@ -1,0 +1,25 @@
+<div class="container" >
+  <%= link_to 'New Item', new_item_path ,class: "btn btn-warning" %>
+  <br>
+  <br>
+  <% @items.each do |item| %>
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <% if item.item_image.attached? %>
+        <%= image_tag item.item_image,size:"100x150",class: "card-img-top" %>
+      <% else %>
+        <img class="card-img-top" src="https://placehold.it/100x150">
+      <% end %>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= item.name %></h5>
+            <p class="card-text"><%= item.color %> <%= item.content %> <%= item.info_tech %><%= number_to_currency item.price, unit: "VND",format: "%n %u",separator: ",",precision: 0 %></p>
+            <p class="card-text"><small class="text-muted"><%= link_to 'Show', item %> <%= link_to 'Edit', edit_item_path(item) %> <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
